@@ -1,5 +1,5 @@
 # Hash Tables
-
+My repo: https://github.com/charisearter/cs-module-project-hash-tables/tree/charise-arter
 ## Day 1
 
 Task: Implement a basic hash table without collision resolution.
