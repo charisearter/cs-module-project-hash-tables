@@ -2,6 +2,7 @@ class HashTableEntry:
     """
     Linked List hash table key/value pair
     """
+
     def __init__(self, key, value):
         self.key = key
         self.value = value
@@ -20,9 +21,12 @@ class HashTable:
     Implement this.
     """
 
-    def __init__(self, capacity):
-        # Your code here
-
+    def __init__(self, capacity=MIN_CAPACITY):
+        # capacity set to default MIN capacity variable
+        # make a list of None depending on capacity
+        self.capacity = capacity
+        self.slots = [None] * capacity
+        self.counter = 0
 
     def get_num_slots(self):
         """
@@ -35,7 +39,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
+        return len(self.slots)
 
     def get_load_factor(self):
         """
@@ -43,32 +47,43 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-
+        return self.counter / self.capacity
 
     def fnv1(self, key):
         """
         FNV-1 Hash, 64-bit
 
         Implement this, and/or DJB2.
+        hash function 1
         """
+        fnv_prime = 1099511628211
+        offset_basis = 14695981039346656037
 
-        # Your code here
+        hash = offset_basis
 
+        for char in key:
+            hash = hash * fnv_prime
+            hash = hash ^ ord(char)
+        return hash
 
     def djb2(self, key):
         """
         DJB2 hash, 32-bit
 
         Implement this, and/or FNV-1.
+        hash function 2
         """
-        # Your code here
-
+        hash = 5381
+        for char in key:
+            hash = ((hash << 5) + hash ) + ord(char)
+        return hash
+        
 
     def hash_index(self, key):
         """
         Take an arbitrary key and return a valid integer index
         between within the storage capacity of the hash table.
+
         """
         #return self.fnv1(key) % self.capacity
         return self.djb2(key) % self.capacity
@@ -81,8 +96,17 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
+        # done in hash index with djb2 or fnv1
+        index = self.hash_index(key)
+        hst = HashTableEntry(key, value)
+        slot = self.slots[index]
 
+        if slot != None:
+            self.slots[index] = hst
+            self.slots[index].next = slot
+        else:
+            self.slots[index] = hst
+            self.counter += 1
 
     def delete(self, key):
         """
@@ -92,8 +116,11 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-
+        if key is key:
+            self.put(key, None)
+            self.counter -= 1
+        else:
+            print('This key was not found.')
 
     def get(self, key):
         """
@@ -104,7 +131,15 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
+        starter = self.hash_index(key)  # where we start
+        n = self.slots[starter]
+        # if not empty
+        if n != None:
+            while n:
+                if n.key == key:
+                    return n.value
+                n = n.next
+            return n
 
     def resize(self, new_capacity):
         """
@@ -114,7 +149,6 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
 
 
 if __name__ == "__main__":

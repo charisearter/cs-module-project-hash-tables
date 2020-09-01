@@ -4,28 +4,28 @@ My repo: https://github.com/charisearter/cs-module-project-hash-tables/tree/char
 
 Task: Implement a basic hash table without collision resolution.
 
-[]1. Implement a `HashTable` class and `HashTableEntry` class.
+[x]1. Implement a `HashTable` class and `HashTableEntry` class.
 
-[] 2. Implement a good hashing function.
+[x] 2. Implement a good hashing function.
 
    Recommend either of:
 
-   * DJB2
+   [x]* DJB2
       - expalnation (https://theartincode.stanis.me/008-djb2/)
-   * FNV-1 (64-bit)
+   [x]* FNV-1 (64-bit)
       - explanation (http://www.isthe.com/chongo/tech/comp/fnv/#FNV-1)
 
    You are allowed to Google for these hashing functions and implement
    from psuedocode.
 
-[] 3. Implement the `hash_index()` that returns an index value for a key.
+[x] 3. Implement the `hash_index()` that returns an index value for a key.
 
-[] 4. Implement the `put()`, `get()`, and `delete()` methods.
+[x] 4. Implement the `put()`, `get()`, and `delete()` methods.
 
 You can test this with:
 
 ```
-[] python test_hashtable_no_collisions.py
+[x] python test_hashtable_no_collisions.py
 ```
 
 The above test program is _unlikely_ to have collisions, but it's
