@@ -13,3 +13,10 @@ finish running in under a minute.
 
 There's no test file for this. It's counting to 50,000, so if it
 finishes before you give up, then you're golden.
+
+My Notes:
+
+A lookup table is a collection of pre-computed values.
+ - when given an x value, the table returns a pre-computed y value
+ - can be used to speed up numerical codes
+ 

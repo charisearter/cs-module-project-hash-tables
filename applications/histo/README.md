@@ -69,12 +69,21 @@ bow              ######
 
 Items: `.vgrzf()` zrgubq ba n qvpgvbanel zvtug or hfrshy.
 
+Items (decoded): .items()` method on a dictionary might be useful.
+
 Sorting: vg'f cbffvoyr sbe `.fbeg()` gb fbeg ba zhygvcyr xrlf ng bapr.
+
+Sorting (decoded): it's possible for `.sort()` to sort on multiple keys at once.
 
 Sorting: artngvirf zvtug uryc jurer `erirefr` jba'g.
 
+Sorting 2 (decoded): negatives might help where `reverse` won't.
+
 Printing: lbh pna cevag n inevnoyr svryq jvqgu va na s-fgevat jvgu
 arfgrq oenprf, yvxr fb `{k:{l}}`
+
+Printing (decoded): you can print a variable field width in an f-string with
+nested braces, like so `{x:{y}}`
 
 (The hints are encrypted with ROT13. Google for `rot13 decoder` to see
 them.)
