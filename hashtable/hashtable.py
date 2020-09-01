@@ -75,9 +75,8 @@ class HashTable:
         """
         hash = 5381
         for char in key:
-            hash = ((hash << 5) + hash ) + ord(char)
+            hash = ((hash << 5) + hash) + ord(char)
         return hash
-        
 
     def hash_index(self, key):
         """
@@ -85,7 +84,7 @@ class HashTable:
         between within the storage capacity of the hash table.
 
         """
-        #return self.fnv1(key) % self.capacity
+        # return self.fnv1(key) % self.capacity
         return self.djb2(key) % self.capacity
 
     def put(self, key, value):
@@ -107,6 +106,10 @@ class HashTable:
         else:
             self.slots[index] = hst
             self.counter += 1
+        if self.get_load_factor() > 0.7:
+            self.resize(self.capacity * 2)
+        elif self.get_load_factor() < 0.2:
+            self.resize(self.capacity == MIN_CAPACITY)
 
     def delete(self, key):
         """

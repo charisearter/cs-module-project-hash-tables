@@ -36,22 +36,22 @@ FNV-1 (64 bit) hashing functions, there are no collisions.
 
 Task: Implement linked-list chaining for collision resolution.
 
-[] 1. Modify `put()`, `get()`, and `delete()` methods to handle collisions.
+[x] 1. Modify `put()`, `get()`, and `delete()` methods to handle collisions.
 
-[] 2. There is no step 2.
+[x] 2. There is no step 2.
 
 You can test this with:
 
 ```
-[] python test_hashtable.py
+[x] python test_hashtable.py
 ```
 
 Task: Implement load factor measurements and automatic hashtable size
 doubling.
 
-[] 1. Compute and maintain load factor.
+[x] 1. Compute and maintain load factor.
 
-[] 2. When load factor increases above `0.7`, automatically rehash the
+[x] 2. When load factor increases above `0.7`, automatically rehash the
    table to double its previous size.
 
 []  Add the `resize()` method.
@@ -59,11 +59,11 @@ doubling.
 You can test this with both of:
 
 ```
-[] python test_hashtable.py
+[x] python test_hashtable.py
 [] python test_hashtable_resize.py
 ```
 
-[] Stretch: When load factor decreases below `0.2`, automatically rehash
+[x?] Stretch: When load factor decreases below `0.2`, automatically rehash
 the table to half its previous size, down to a minimum of 8 slots.
 
 ## Day 3 and Day 4
