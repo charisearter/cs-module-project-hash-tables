@@ -54,16 +54,16 @@ doubling.
 [x] 2. When load factor increases above `0.7`, automatically rehash the
    table to double its previous size.
 
-[]  Add the `resize()` method.
+[x]  Add the `resize()` method.
 
 You can test this with both of:
 
 ```
 [x] python test_hashtable.py
-[] python test_hashtable_resize.py
+[x] python test_hashtable_resize.py
 ```
 
-[x?] Stretch: When load factor decreases below `0.2`, automatically rehash
+[] Stretch: When load factor decreases below `0.2`, automatically rehash
 the table to half its previous size, down to a minimum of 8 slots.
 
 ## Day 3 and Day 4

@@ -108,8 +108,8 @@ class HashTable:
             self.counter += 1
         if self.get_load_factor() > 0.7:
             self.resize(self.capacity * 2)
-        elif self.get_load_factor() < 0.2:
-            self.resize(self.capacity == MIN_CAPACITY)
+        # elif self.get_load_factor() < 0.2:
+        #     self.resize(self.capacity == MIN_CAPACITY) I don't have this part correct
 
     def delete(self, key):
         """
@@ -151,7 +151,23 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
+        # make a new hash table with the new capacity
+        newTable = HashTable(new_capacity)
+        # for each value in the table slots
+        for spot in self.slots:
+            if spot:  # checking to see if the value is there
+                # if there -> update the new table using self.put(key, value)
+                newTable.put(spot.key, spot.value)
+                if spot.next:  # if there is a next (spot.next)
+                    current = spot  # make current variable and set to spot
+                    while current.next:  # while there is a current.next
+                        current = current.next  # the new current id the current.next
+                        # change the newTable using put method and passing the current key and value
+                        newTable.put(current.key, current.value)
+        # self.slots = the new hash.value
+        self.slots = newTable.slots  # slots are set to new hash table slots
+        # self.capacity is now the new hash.capacity
+        self.capacity = newTable.capacity
 
 
 if __name__ == "__main__":
