@@ -26,7 +26,7 @@ class HashTable:
         # make a list of None depending on capacity
         self.capacity = capacity
         self.slots = [None] * capacity #whatever is the min capacity, makes that many empty slots 
-        self.counter = 0 # counter is set to 0 -- Keeps track of how many slots are added or deleted
+        self.counter = 0 # counter is set to 0 -- Keeps track of how many items are added or deleted
 
     def get_num_slots(self): #tell the number of slots
         """
@@ -50,7 +50,7 @@ class HashTable:
         #Load factor -> tells how full the hash table can get before automatically increasing the capacity
         # Higher value decreases space overhead (space complexity?) but increases lookup cost (time complexity?)
         # I want to know if this means that the space complexity will decrease while the time complexity will increase if the load factor automatically increases when full.
-        return self.counter / self.capacity #the counter / the capicity is the load factor
+        return self.counter / self.capacity #the items / the capacity is the load factor
 
     def fnv1(self, key):
         """
