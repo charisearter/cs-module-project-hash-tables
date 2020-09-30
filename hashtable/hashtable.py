@@ -25,10 +25,10 @@ class HashTable:
         # capacity set to default MIN capacity variable
         # make a list of None depending on capacity
         self.capacity = capacity
-        self.slots = [None] * capacity
-        self.counter = 0
+        self.slots = [None] * capacity #whatever is the min capacity, makes that many empty slots 
+        self.counter = 0 # counter is set to 0 -- Keeps track of how many slots are added or deleted
 
-    def get_num_slots(self):
+    def get_num_slots(self): #tell the number of slots
         """
         Return the length of the list you're using to hold the hash
         table data. (Not the number of items stored in the hash table,
@@ -39,7 +39,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        return len(self.slots)
+        return len(self.slots) #return the number of slots in the list
 
     def get_load_factor(self):
         """
@@ -47,7 +47,10 @@ class HashTable:
 
         Implement this.
         """
-        return self.counter / self.capacity
+        #Load factor -> tells how full the hash table can get before automatically increasing the capacity
+        # Higher value decreases space overhead (space complexity?) but increases lookup cost (time complexity?)
+        # I want to know if this means that the space complexity will decrease while the time complexity will increase if the load factor automatically increases when full.
+        return self.counter / self.capacity #the counter / the capicity is the load factor
 
     def fnv1(self, key):
         """
@@ -56,6 +59,8 @@ class HashTable:
         Implement this, and/or DJB2.
         hash function 1
         """
+        #notes for this is in the read me
+        # http://www.isthe.com/chongo/tech/comp/fnv/#FNV-1
         fnv_prime = 1099511628211
         offset_basis = 14695981039346656037
 
@@ -73,6 +78,8 @@ class HashTable:
         Implement this, and/or FNV-1.
         hash function 2
         """
+        # notes are in Readme
+        # https://theartincode.stanis.me/008-djb2/
         hash = 5381
         for char in key:
             hash = ((hash << 5) + hash) + ord(char)
@@ -96,22 +103,22 @@ class HashTable:
         Implement this.
         """
         # done in hash index with djb2 or fnv1
-        index = self.hash_index(key)
-        hst = HashTableEntry(key, value)
-        slot = self.slots[index]
+        index = self.hash_index(key) #index of list
+        hst = HashTableEntry(key, value) #hash table
+        slot = self.slots[index] #slot it is placed in
 
-        if slot != None:
-            self.slots[index] = hst
-            self.slots[index].next = slot
+        if slot != None: #if slot is not empty
+            self.slots[index] = hst 
+            self.slots[index].next = slot #put in next slot
         else:
-            self.slots[index] = hst
-            self.counter += 1
-        if self.get_load_factor() > 0.7:
-            self.resize(self.capacity * 2)
+            self.slots[index] = hst #if it is empty, add the slot 
+            self.counter += 1 #add 1 to counter
+        if self.get_load_factor() > 0.7: #if the load factor is greater than .7
+            self.resize(self.capacity * 2) #multipy the capacity by 2 and make it the new capacity (resize it)
         # elif self.get_load_factor() < 0.2:
-        #     self.resize(self.capacity == 8) #I don't have this part correct
+        #     self.resize(self.capacity == 8) #I don't have this part correct, I wonder if I just put self.capacity = 8 will it owrk?
 
-    def delete(self, key):
+    def delete(self, key): #delete the value in a slot
         """
         Remove the value stored with the given key.
 
@@ -119,13 +126,13 @@ class HashTable:
 
         Implement this.
         """
-        if key is key:
-            self.put(key, None)
-            self.counter -= 1
+        if key is key: #if this is the slot you are looking for
+            self.put(key, None) #set the key to empty
+            self.counter -= 1 # -1 from the counter
         else:
-            print('This key was not found.')
+            print('This key was not found.') #if that key doesn't exist print this message
 
-    def get(self, key):
+    def get(self, key): #give me the key
         """
         Retrieve the value stored with the given key.
 
@@ -135,16 +142,16 @@ class HashTable:
         """
         # Your code here
         starter = self.hash_index(key)  # where we start
-        n = self.slots[starter]
+        n = self.slots[starter] #node slot where we start
         # if not empty
         if n != None:
             while n:
-                if n.key == key:
-                    return n.value
-                n = n.next
-            return n
+                if n.key == key: #if it is the node you are looking for
+                    return n.value #return the value of the node
+                n = n.next #go to the next node
+            return n #return the node
 
-    def resize(self, new_capacity):
+    def resize(self, new_capacity): #if the capacity is full 
         """
         Changes the capacity of the hash table and
         rehashes all key/value pairs.
