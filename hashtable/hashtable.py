@@ -25,10 +25,11 @@ class HashTable:
         # capacity set to default MIN capacity variable
         # make a list of None depending on capacity
         self.capacity = capacity
-        self.slots = [None] * capacity #whatever is the min capacity, makes that many empty slots 
-        self.counter = 0 # counter is set to 0 -- Keeps track of how many items are added or deleted
+        # whatever is the min capacity, makes that many empty slots
+        self.slots = [None] * capacity
+        self.counter = 0  # counter is set to 0 -- Keeps track of how many items are added or deleted
 
-    def get_num_slots(self): #tell the number of slots
+    def get_num_slots(self):  # tell the number of slots
         """
         Return the length of the list you're using to hold the hash
         table data. (Not the number of items stored in the hash table,
@@ -39,7 +40,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        return len(self.slots) #return the number of slots in the list
+        return len(self.slots)  # return the number of slots in the list
 
     def get_load_factor(self):
         """
@@ -47,10 +48,11 @@ class HashTable:
 
         Implement this.
         """
-        #Load factor -> tells how full the hash table can get before automatically increasing the capacity
+        # Load factor -> tells how full the hash table can get before automatically increasing the capacity
         # Higher value decreases space overhead (space complexity?) but increases lookup cost (time complexity?)
         # I want to know if this means that the space complexity will decrease while the time complexity will increase if the load factor automatically increases when full.
-        return self.counter / self.capacity #the items / the capacity is the load factor
+        # the items / the capacity is the load factor
+        return self.counter / self.capacity
 
     def fnv1(self, key):
         """
@@ -59,7 +61,7 @@ class HashTable:
         Implement this, and/or DJB2.
         hash function 1
         """
-        #notes for this is in the read me
+        # notes for this is in the read me
         # http://www.isthe.com/chongo/tech/comp/fnv/#FNV-1
         fnv_prime = 1099511628211
         offset_basis = 14695981039346656037
@@ -103,22 +105,21 @@ class HashTable:
         Implement this.
         """
         # done in hash index with djb2 or fnv1
-        index = self.hash_index(key) #index of list
-        hst = HashTableEntry(key, value) #hash table
-        slot = self.slots[index] #slot it is placed in
+        index = self.hash_index(key)  # index of list
+        hst = HashTableEntry(key, value)  # hash table
+        slot = self.slots[index]  # slot it is placed in
 
-        if slot != None: #if slot is not empty
-            self.slots[index] = hst 
-            self.slots[index].next = slot #put in next slot
+        if slot != None:  # if slot is not empty
+            self.slots[index] = hst
+            self.slots[index].next = slot  # put in next slot
         else:
-            self.slots[index] = hst #if it is empty, add the slot 
-            self.counter += 1 #add 1 to counter
-        if self.get_load_factor() > 0.7: #if the load factor is greater than .7
-            self.resize(self.capacity * 2) #multipy the capacity by 2 and make it the new capacity (resize it)
-        # elif self.get_load_factor() < 0.2:
-        #     self.resize(self.capacity == 8) #I don't have this part correct, I wonder if I just put self.capacity = 8 will it owrk?
+            self.slots[index] = hst  # if it is empty, add the slot
+            self.counter += 1  # add 1 to counter
+        if self.get_load_factor() > 0.7:  # if the load factor is greater than .7
+            # multipy the capacity by 2 and make it the new capacity (resize it)
+            self.resize(self.capacity * 2)
 
-    def delete(self, key): #delete the value in a slot
+    def delete(self, key):  # delete the value in a slot
         """
         Remove the value stored with the given key.
 
@@ -126,13 +127,17 @@ class HashTable:
 
         Implement this.
         """
-        if key is key: #if this is the slot you are looking for
-            self.put(key, None) #set the key to empty
-            self.counter -= 1 # -1 from the counter
+        if key is key:  # if this is the slot you are looking for
+            self.put(key, None)  # set the key to empty
+            self.counter -= 1  # -1 from the counter
         else:
-            print('This key was not found.') #if that key doesn't exist print this message
+            # if that key doesn't exist print this message
+            print('This key was not found.')
+        # if self.get_load_factor() < 0.2:  # added to delete because taking away from hash table
+        #     # I don't have this part correct, I wonder if I just put self.capacity = 8 will it owrk?
+        #     self.resize(self.capacity // 2)  # // for no remainder
 
-    def get(self, key): #give me the key
+    def get(self, key):  # give me the key
         """
         Retrieve the value stored with the given key.
 
@@ -141,17 +146,18 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        starter = self.hash_index(key)  # where we start
-        n = self.slots[starter] #node slot where we start
+        # where we start -- using linked lists -- chaining
+        starter = self.hash_index(key)
+        n = self.slots[starter]  # node slot where we start
         # if not empty
         if n != None:
             while n:
-                if n.key == key: #if it is the node you are looking for
-                    return n.value #return the value of the node
-                n = n.next #go to the next node
-            return n #return the node
+                if n.key == key:  # if it is the node you are looking for
+                    return n.value  # return the value of the node
+                n = n.next  # go to the next node
+            return n  # return the node
 
-    def resize(self, new_capacity): #if the capacity is full 
+    def resize(self, new_capacity):  # if the capacity is full
         """
         Changes the capacity of the hash table and
         rehashes all key/value pairs.
@@ -168,7 +174,7 @@ class HashTable:
                 if spot.next:  # if there is a next (spot.next)
                     current = spot  # make current variable and set to spot
                     while current.next:  # while there is a current.next
-                        current = current.next  # the new current id the current.next
+                        current = current.next  # the new current is the current.next
                         # change the newTable using put method and passing the current key and value
                         newTable.put(current.key, current.value)
         # self.slots = the new hash.value
