@@ -29,7 +29,7 @@ def slowfun(x, y):
         v //= (x + y)
         v %= 982451653
         # add the values to the cache
-        cache[x, y] = v
+        cache[(x, y)] = v
         # return the values x,y in the cache
     return cache[(x, y)]
 
