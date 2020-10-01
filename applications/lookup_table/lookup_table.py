@@ -2,8 +2,6 @@
 import math
 import random
 
-cache = {}  # empty dictionary to hold cache of numbers already factored
-
 
 def slowfun_too_slow(x, y):
     v = math.pow(x, y)
@@ -12,6 +10,9 @@ def slowfun_too_slow(x, y):
     v %= 982451653
 
     return v
+
+
+cache = {}  # empty dictionary to hold cache of numbers already factored
 
 
 def slowfun(x, y):
