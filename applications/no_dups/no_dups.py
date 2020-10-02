@@ -14,14 +14,24 @@
 # Step 4: Join each words are unique to form single string.
 
 # """
-from collections import OrderedDict
+# from collections import OrderedDict <--first attempt
+from collections import Counter  # 2nd attempt
 
 
 def no_dups(s):
-#     # Your code here
-    return " ".join(OrderedDict.fromkeys(s)
+    #     # Your code here
+    # 1st attempt
+    # return " ".join(OrderedDict.fromkeys(s)
 
+    # 2nd attempt
 
+    s = s.split(" ")  # split the string of words
+    # iterate thrugh string by word index starting at 0 untl get to end of string
+    for index in range(0, len(s)):
+        s[index] = "".join(s[index])
+        double = Counter(s)  # I am assuming Counter counts the words
+        s = " ".join(double.keys())
+    return s
 
 
 if __name__ == "__main__":
